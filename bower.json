@@ -1,0 +1,12 @@
+{
+  "name": "kysely",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.0",
+    "angular": "~1.2.21",
+    "angular-resource": "~1.2.21",
+    "angular-route": "~1.2.21",
+    "font-awesome": "~4.1.0"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,56 @@
+<div class="question question-field" ng-class="{true:'editable',false:'no-edit'}[edit]" id="{{id}}">
+	<span class="question-index">{{$index +1 }}</span>
+	<h3>{{question.label}}</h3>
+
+	<div class="input-field" ng-if="edit">	
+		<label for="question-label-edit-{{question.label}}-{{$index}}">Otsikko</label>
+		<input id="question-label-edit-{{question.label}}-{{$index}}" class="question-edit question-title" type="text" ng-model="question.label">
+	</div>
+	
+	<div class="input-field" ng-if="edit">
+		<label for="question-name-edit-{{question.name}}-{{$index}}">Nimi</label>
+		<input name id="question-name-edit-{{question.name}}-{{$index}}" class="question-edit" type="text" ng-model="question.name">
+	</div>
+
+	<div class="input-field" ng-if="edit">
+		<label ng-if="edit" for="question-label-edit-{{question.label}}-{{$index}}">Tyyppi</label>
+		<select class="question-edit" ng-model="question.type" ng-if="edit">
+			<option value="text">Tekstikenttä</option>
+			<option value="textarea">Tekstialue</option>
+			<option value="checkbox">Monivalinta</option>
+			<option value="radio">Valinta</option>
+		</select>
+	</div>
+
+	<div class="question-items-container" ng-class="question.type" >	
+		
+		<div class="question-item question-{{question.type}}" ng-switch="question.type" ng-repeat="answer in question.answers">
+
+			<p for="{{answer.name}}-{{$index}}" ng-if="!edit && (question.type == 'text' || question.type=='textarea')">{{answer.label}}</p>
+
+			<input ng-if="!edit" id="{{answer.name}}-{{$index}}" name="{{answer.name}}" ng-model="answer.value" type="checkbox" ng-switch-when="checkbox">
+			<input ng-if="!edit" id="{{answer.name}}-{{$index}}" name="{{answer.name}}" ng-model="answer.value" value="{{answer.value}}" type="radio" ng-switch-when="radio">
+			<input ng-if="!edit" id="{{answer.name}}-{{$index}}" name="{{answer.name}}" ng-model="question.value" type="text" ng-switch-when="text">
+			<textarea ng-if="!edit" id="{{answer.name}}-{{$index}}" name="{{answer.name}}" ng-model="answer.value" type="text" ng-switch-when="textarea"></textarea>
+			
+
+			<label for="{{answer.name}}-{{$index}}" ng-if="!edit && (question.type == 'checkbox' || question.type=='radio')">{{answer.label}}</label>
+
+			<div class="input-field" ng-if="edit && question.type != 'radio'" >				
+				<label for="{{answer.name}}-{{$index}}">Nimi</label>
+				<input name id="answer-name-{{answer.name}}-{{$index}}" class="question-edit question-label" type="text" placeholder="kentän nimi" ng-model="answer.name">
+			</div>
+
+			<div class="input-field" ng-if="edit">
+				<label for="answer-label-{{answer.name}}-{{$index}}">Kysymys</label>
+				<input id="answer-label-{{answer.name}}-{{$index}}"class="question-edit question-label" ng-if="edit" type="text" placeholder="label" ng-model="answer.label">
+			</div>
+
+			<span class="remove" ng-if="edit && (question.type == 'checkbox' || question.type=='radio')" ng-click="removeAnswer(questionIndex, $index)"><i class="fa fa-trash-o"></i></span>
+		</div>
+		
+		<button class="add-new-answer" ng-if="edit" ng-click="addAnswer($index, question.type)"><i class="fa fa-plus"></i></button>
+	</div>
+
+	<span class="remove" ng-if="edit" ng-click="removeQuestion($index)"><i class="fa fa-trash-o"></i></span>
+</div>

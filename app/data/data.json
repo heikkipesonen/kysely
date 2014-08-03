@@ -1,0 +1,92 @@
+{
+	"id":1089723,
+	"title":"testikysely",
+	"date":123456789,
+	"questions":[
+		{
+			"id":1,
+			"label":"onko",
+			"type":"checkbox",
+			"name":"onko",
+			"value":{
+				"jorma":true,
+				"uotinen":false,
+				"kissa":true,
+				"poro":false
+			},
+			"answers":[
+				{
+					"name":"jorma",
+					"value":"neekeri",
+					"label":"eiole"
+				},
+				{
+					"name":"uotinen",
+					"value":"homo",
+					"label":"toki on"
+				},
+				{
+					"name":"kissa",
+					"value":"kissa",
+					"label":"kissat koiria"
+				},
+				{
+					"name":"poro",
+					"value":"poro",
+					"label":"majava"
+				}
+			]
+		},
+		{
+			"id":2,
+			"label":"onko vieläkään?",
+			"type":"radio",
+			"value":"eiole",
+			"name":"onko",
+			"answers":[
+				{
+					"value":"eiole",
+					"label":"eiole"
+				},
+				{
+					"value":"kameli",
+					"label":"toki on"
+				},
+				{
+					"value":"kissat koiria",
+					"label":"kissat koiria"
+				},
+				{					
+					"value":"homo",
+					"label":"majava"
+				}
+			]
+		},
+		{
+			"id":3,
+			"label":"onko edelleenkään?",
+			"name":"onko",
+			"type":"text",
+			"value":null,
+			"answers":[
+				{
+					"name":"pecca",
+					"label":"skriva här"
+				}
+			]
+		},
+		{
+			"id":3,
+			"label":"onko siltikään?",
+			"name":"onko",
+			"type":"textarea",
+			"value":null,
+			"answers":[
+				{
+					"name":"subu",
+					"label":"skriva okso här"
+				}
+			]
+		}
+	]
+}
