@@ -1,7 +1,16 @@
 <div class="container question-wrapper">
 	<h2>kyselytööl</h2>
 
-	<a href="#/uusi"><button class="btn">create</button></a>
-	<a href="#/browse"><button class="btn">browse</button></a>
+	<table class="query-list">
+		<tr ng-repeat="query in list">			
+			
+				<td>{{$index+1}}</td>
+				<td>{{query.slug}}</td>
+				<td>{{query.title}}</td>
+			
+		</tr>
+	</table>
 
+
+	<a href="#/uusi"><button class="add-new-query submit"><i class="fa fa-plus"></i></button></a>
 </div>

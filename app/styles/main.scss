@@ -90,6 +90,29 @@ button{
     width: 100%;
 }
 
+ul,li{
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
+
+.query-list{
+    padding: 30px;
+   td{
+        padding: 5px;
+   }
+}
+
+.attribution{
+    p{
+        font-size:8pt;
+    }
+    position: fixed;
+    bottom:0px;
+    right: 0px;
+
+}
+
 .date{
     font-size: 8pt;
 }
@@ -100,7 +123,7 @@ button{
     margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
-    padding-bottom: 70px;
+
     width: 700px;    
     background-color: #fff;
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);    
@@ -108,15 +131,20 @@ button{
     &.edit{
         padding-bottom:0px;
     }
+
+    h2,h1{
+        text-align:center;
+        padding: 20px;
+    }
 }
 
-.question-footer{
-    background-color: #222;
-    height: 250px;
+.question-footer{    
     width: 100%;
     margin-top: 50px;
-    margin-bottom: 50px;
-}
+
+    text-align: center;
+    font-size: 6pt;
+ }
 
 .input-field{
     position: relative;
@@ -181,8 +209,8 @@ div:hover{
 
     margin-top: -100px;
     height: auto;
-    width: 90px;
-    
+    width: 70px;
+    padding:10px;
     
     background-color: $theGreen;
 
@@ -193,12 +221,12 @@ div:hover{
         border:none;
         outline:none;
         color:white;
-        font-size: 60px;
+        font-size: 50px;
         background-color: transparent;
         transition-duration: 0.2s;
 
         &:hover{
-            color:rgba(255,255,255,0.8);
+            color: lighten($theGreen, 50)
         }
     }
 
@@ -213,7 +241,7 @@ button.submit.unsaved{
     padding: 30px;
 }
 
-.add-new-question{
+.submit{
     width: 100%;
     height: 64px;
     text-align: center;

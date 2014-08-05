@@ -10,17 +10,22 @@ var kysely = angular.module('kysely',['kyselyControllers','ngResource','ngRoute'
                     controller: 'mainController'
                 })
 
+                .when('/kiitos', {
+                    templateUrl: 'templates/thanks.html',
+                    controller: 'thanksController'
+                })
+
                 .when('/uusi', {
                     templateUrl: 'templates/create.html',
                     controller: 'editController'
                 })
 
-                .when('/muokkaa/:question_id', {
+                .when('/muokkaa/:slug', {
                     templateUrl: 'templates/create.html',
                     controller: 'editController'
                 })
 
-                .when('/kysely/:question_id', {
+                .when('/kysely/:slug', {
                     templateUrl: 'templates/answer.html',
                     controller: 'answerController'
                 })
@@ -42,21 +47,21 @@ var kysely = angular.module('kysely',['kyselyControllers','ngResource','ngRoute'
   	}])
 
 	.factory('Query',['$http','$resource','login',function($http,$resource,login){
-		return $resource('http://192.168.0.10/kysely/backend/:userid/:id', {
+		return $resource('http://192.168.0.10/kysely/backend/:userid/:slug', {
 			userid:login.getLogin(),
-			id:'@id'
+			slug:'@slug'
 		}, {
 			create:{
 				method:'POST',
 				params:{
-					id:'create'					
+					slug:'create'					
 				}				
 			},
 			reply:{
 				method:'POST',
 				params:{
 					userid:'response',
-					id:'@id'
+					slug:'@slug'
 				}
 			}
 		});

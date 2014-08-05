@@ -36,8 +36,8 @@ class Query{
 		$o = ORM::for_table('q_query');
 		$query = '';
 
-		if (isset($data['id'])){
-			$query = $o->where('id',$data['id'])->find_one();
+		if (isset($data['slug'])){
+			$query = $o->where('slug',$data['slug'])->find_one();
 		} 
 		
 		if (!is_object($query)){
@@ -55,7 +55,7 @@ class Query{
 				$questions = self::saveQuestions($query->id, $data['questions']);
 			}
 
-			return $query->id();
+			return $query->slug;
 		}
 		return false;
 	}
@@ -104,10 +104,48 @@ class Query{
 		}
 	}
 
-	public static function getQuery($id){
+	public static function saveReply($slug, $query, $instance){
+		$queryObj = ORM::for_table('q_query')->where('slug',$slug)->find_one();
+
+		if (is_object($queryObj)){
+			$query_id = $queryObj->id();
+
+			foreach ($query['questions'] as $question){
+				if ($question['type'] == 'radio'){				
+
+					$reply = ORM::for_table('q_reply')->create();
+					$reply->value = $question['value'];
+					$reply->answer_id = $question['id'];
+					$reply->question_id = $question['id'];
+					$reply->instance = $instance;
+					
+				} else {
+
+					foreach ($question['answers'] as $answer){
+
+						$reply = ORM::for_table('q_reply')->create();
+						$reply->value = $answer['value'];
+						$reply->answer_id = $answer['id'];
+						$reply->question_id = $question['id'];
+						$reply->instance = $instance;
+
+						$reply->save();
+					}
+				}
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+
+
+
+	public static function getQuery($slug){
 		$result=array();		
 
-		$query = ORM::for_table('q_query')->where('id',$id)->find_one();
+		$query = ORM::for_table('q_query')->where('slug',$slug)->find_one();
 
 		if (is_object($query)){
 			$result = $query->as_array();
@@ -146,5 +184,18 @@ class Query{
 		$q->save();
 
 		return $q->as_array();
+	}
+
+
+	public static function getList($user_id){
+		$list = ORM::for_table('q_query')->find_many();
+
+		$queries = array();
+		
+		foreach ($list as $q) {
+			$queries[] = $q->as_array();
+		}
+
+		return $queries;
 	}
 }

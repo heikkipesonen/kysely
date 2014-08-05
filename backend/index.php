@@ -6,40 +6,45 @@ require_once('utils.php');
 require_once('query.php');
 
 Flight::route('/',function(){
-	echo 'pere';
+	Flight::json(array('ok'=>'true'));
+});
+
+Flight::route('GET /list/@userid',function($userid){
+	Flight::json( Query::getList($userid) );
 });
 
 Flight::route('POST /@userId',function($userId){
 	$data = Flight::request()->getData();
-	$id = Query::save($data);
+	$slug = Query::save($data);
 
-	Flight::json(Query::getQuery($id));
+	Flight::json(Query::getQuery($slug));
 });
 
 Flight::route('POST /@userId/create',function($userId){
 	Flight::json(Query::create($userId));
 });
 
-Flight::route('POST /reply/@querySlug',function($querySlug){
+Flight::route('POST /reply/@querySlug/@instance',function($querySlug,$instance){
+	$data = Flight::request()->getData();
+	
+	Query::saveReply($querySlug, $data, $instance);
+	
 	Flight::json(array('ok'=>true));
 });
 
-Flight::route('GET /@userId/@questionId',function($userId,$questionId){
-	Flight::json( Query::getQuery($questionId) );
+Flight::route('GET /@userId/@querySlug',function($userId,$querySlug){
+	Flight::json( Query::getQuery($querySlug) );
 });
 
-Flight::route('POST /@userId/@questionId',function($userId,$questionId){
+Flight::route('POST /@userId/@querySlug',function($userId,$querySlug){
 	$data = Flight::request()->getData();
 
-	$data['id']=$questionId;
+	$data['slug']=$querySlug;
 	Query::save($data);
 
-	Flight::json(Query::getQuery($data['id']));	
+	Flight::json(Query::getQuery($data['slug']));	
 });
 
-Flight::route('PUT /@userId/@questionId',function($userId,$questionId){
-	echo 'pweewfds';
-});
 
 
 Flight::start();

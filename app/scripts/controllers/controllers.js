@@ -1,32 +1,52 @@
+var REST_URL = 'http://192.168.0.10/kysely/backend';
 kyselyControllers
-	.controller('mainController', ['$scope', function($scope){
+	.controller('thanksController', ['$scope', function($scope){
 
 	}])
 
-	.controller('answerController', ['$scope','Query','$routeParams','$http', function($scope,Query,$routeParams,$http){
+	.controller('mainController', ['$scope','login','$http', function($scope,login,$http){
+		$http.get(REST_URL+'/list/'+login.getLogin())
+			.success(function(data){
+				$scope.list = data;
+			})
+
+	}])
+
+	.controller('answerController', ['$scope','Query','$routeParams','$http','$location', function($scope,Query,$routeParams,$http,$location){
+
+		$scope.makeid = function(){
+		    var text = "";
+		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+		    for( var i=0; i < 32; i++ )
+		        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+		    return text;
+		}
 
 		$scope.edit = false;
-		$scope.query = Query.get({id:$routeParams.question_id});
+		$scope.query = Query.get({slug:$routeParams.slug});
 		$scope.date = Date.now();
+
+		$scope.instance_id = $scope.makeid();
 
 		$scope.reply = function(){
 			//$scope.query.$reply({id:$scope.query.slug});
 
-			$http({
-				url:'http://192.168.0.10/kysely/backend/reply/'+$scope.query.slug,
-				method:'post',
-				data:$scope.query
-			}).then(function(response){
 
-			},function(response){
+			$http
+				.post(REST_URL+'/reply/'+$scope.query.slug+'/'+$scope.instance_id,$scope.query)
+				.success(function(response){
+					$location.path('/kiitos');
+				})
 
-			})
+				.error(function(response){		});
 		}
 	}])
 
 	.controller('editController', ['$routeParams','$scope','Query','$window','$timeout', function($routeParams,$scope,Query,$window,$timeout){
-		if ($routeParams.question_id){
-			$scope.query = Query.get({id:$routeParams.question_id});
+		if ($routeParams.slug){
+			$scope.query = Query.get({slug:$routeParams.slug});
 		} else {
 			$scope.query = new Query();
 		}
