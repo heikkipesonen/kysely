@@ -2,17 +2,10 @@
 // endbower
 @import 'reset';
 
-$theGreen : #528f2d;
-$theBlue : #31A5E6;
 
 body {
-    background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
-    font-weight: 200;
 }
 
-$blue : #55b0ea;
 
 h1,h2,h3,h4{
     font-weight: 100;
@@ -47,6 +40,10 @@ a{
     width: 100%;
     height: 100%;
     color: white;
+    background: white;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    
+    font-weight: 200;
 }
 
 .clear{
@@ -57,11 +54,22 @@ a{
     padding: 5%;
 }
 
+.query-wrapper{
+    position: absolute;
+    top:0px;
+    left:200px;
+    right: 0px;
+    height: 100%;
+    overflow-y: auto;
+
+    
+}
+
 .page-title{
     text-align: center;
     padding:30px;
     text-transform: uppercase;
-
+    color: black;
     span{
         font-weight: 800;
     }
@@ -99,5 +107,7 @@ table{
 }
 
 @import 'input';
+@import 'toolbar';
+@import 'imagebutton';
 @import 'question';
 @import 'login';

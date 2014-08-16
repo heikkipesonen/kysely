@@ -18,16 +18,17 @@ var kysely = angular.module('kysely',['ngResource','ngRoute','ngResource','duScr
 
         function($routeProvider) {
             $routeProvider
-                .when('/login', {
-                    templateUrl: 'templates/login.html',
-                    controller: 'loginController'
-                })
 
                 .when('/', {
                     templateUrl: 'templates/main.html',
                     controller: 'mainController'
                 })
                 
+                .when('/create', {
+                    templateUrl: 'templates/create.html',
+                    controller: 'editController'
+                })
+
                  .otherwise({
                     redirectTo: '/'
                 });

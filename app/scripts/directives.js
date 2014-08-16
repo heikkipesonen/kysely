@@ -49,6 +49,7 @@ kysely.directive('checkbox', function(){
 			}
 		};
 	})
+
 	.directive('imagebutton', function(){
 		// Runs during compile
 		return {
@@ -57,8 +58,10 @@ kysely.directive('checkbox', function(){
 			// terminal: true,
 			scope: {
 				image:'@',
+				imagehover:'@',
 				action:'=',
-				label:'='
+				link:'@',
+				label:'@'
 			}, // {} = isolate, true = child, false/undefined = no change
 			// controller: function($scope, $element, $attrs, $transclude) {},
 			// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
@@ -73,15 +76,33 @@ kysely.directive('checkbox', function(){
 			}
 		};
 	})
-	
-	.directive('toolbar',function(){
+
+	.directive('mainmenu', function(){
 		// Runs during compile
 		return {
 			// name: '',
 			// priority: 1,
 			// terminal: true,
-			//scope: {}, // {} = isolate, true = child, false/undefined = no change
-			controller: 'toolbarController',
+			// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
+			restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
+			// template: '',
+			templateUrl: 'templates/mainmenu.html',
+			replace: true,
+			controller:'menuController',
+			// transclude: true,
+			// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
+			link: function($scope, iElm, iAttrs, controller) {
+				
+			}
+		};
+	})
+
+	.directive('toolbar', function(){
+		// Runs during compile
+		return {
+			// name: '',
+			// priority: 1,
+			// terminal: true,
 			// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
 			restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
 			// template: '',
@@ -94,50 +115,6 @@ kysely.directive('checkbox', function(){
 			}
 		};
 	})
-
-	.directive('tool',function(){
-		// Runs during compile
-		return {
-			// name: '',
-			// priority: 1,
-			// terminal: true,
-			//scope: {}, // {} = isolate, true = child, false/undefined = no change
-			//controller: 'toolbarController',
-			// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
-			restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
-			// template: '',
-			templateUrl: 'templates/tool.html',
-			replace: true,
-			// transclude: true,
-			// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
-			link: function($scope, iElm, iAttrs, controller) {
-				
-			}
-		};
-	})
-	.directive('topmenu',function(){
-		// Runs during compile
-		return {
-			// name: '',
-			// priority: 1,
-			// terminal: true,
-			// scope: {}, // {} = isolate, true = child, false/undefined = no change
-			controller: function($scope, $element, $attrs, $transclude, login) {
-				$scope.user = login;	
-			},
-			// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
-			restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
-			// template: '',
-			templateUrl: 'templates/topmenu.html',
-			replace: true,
-			// transclude: true,
-			// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
-			link: function($scope, iElm, iAttrs, controller) {
-				
-			}
-		};
-	})
-	
 
 	.directive('question', function(){
 		// Runs during compile

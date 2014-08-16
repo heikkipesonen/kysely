@@ -1,11 +1,13 @@
 <div class="query-view">
 
-	<div class="container">					
-	    <h2 class="page-title" ng-if="!query.title">Ei nimeä</h2>
-	    <h2 class="page-title" ng-if="query.title">{{query.title}}</h2>
+	<toolbar></toolbar>
+
+	<div class="container query">			
+		<div class="input-group">
+		    <h2 class="page-title" ng-if="!query.title">Ei nimeä</h2>
+		    <h2 class="page-title" ng-if="query.title">{{query.title}}</h2>
 	
 
-		<div class="input-group">
 			
 		    <div class="input-field">
 			    <label>Kyselyn nimi</label>
@@ -26,6 +28,3 @@
 
 	</div>
 </div>
-
-
-<toolbar></toolbar>
