@@ -1,0 +1,14 @@
+<ul class="toolbar">
+
+	<li class="item" ng-repeat="tool in tools" ng-class="{open : tool.open === true}">
+		
+		<tool></tool>
+		
+		<ul class="submenu" ng-if="tool.submenu && tool.open">
+			<li class="item" ng-repeat="tool in tool.submenu">
+				<tool></tool>
+			</li>			
+		</ul>
+	</li>
+	
+</ul>

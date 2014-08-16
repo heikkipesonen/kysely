@@ -1,0 +1,11 @@
+<div class="field checkbox">
+
+	<div class="field-logo" ng-click="value = !value">	
+		<img ng-if="value" ng-src="images/checkbox.png" alt="">
+		<img ng-if="!value" ng-src="images/checkbox-unchecked.png" alt="">
+	</div>
+
+	<input class="label-input" type="text" ng-if="edit" ng-model="answer.label" placeholder="label">
+
+	<p class="label" ng-if="!edit" ng-click="value = !value">{{answer.label}}</p>
+</div>

@@ -4,9 +4,37 @@ require_once('conf.php');
 require 'flight/Flight.php';
 require_once('utils.php');
 require_once('query.php');
+require_once('user.php');
 
 Flight::route('/',function(){
 	Flight::json(array('ok'=>'true'));
+});
+
+Flight::route('POST /reply/@querySlug/@instance',function($querySlug,$instance){
+	$data = Flight::request()->getData();
+	
+	Query::saveReply($querySlug, $data, $instance);
+	
+	Flight::json(array('ok'=>true));
+});
+
+
+Flight::route('GET /list/users',function(){
+	$result = User::getList();
+	Flight::json( $result );
+});
+
+Flight::route('POST /login/create',function(){	
+	$data = Flight::request()->getData();
+
+	$result = User::create($data['username'], $data['password']);
+	Flight::json( $result );
+});
+
+Flight::route('POST /login',function(){	
+	$data = Flight::request()->getData();
+	$result = User::authorize($data['username'], $data['password']);
+	Flight::json( $result );
 });
 
 Flight::route('GET /list/@userid',function($userid){
@@ -24,13 +52,6 @@ Flight::route('POST /@userId/create',function($userId){
 	Flight::json(Query::create($userId));
 });
 
-Flight::route('POST /reply/@querySlug/@instance',function($querySlug,$instance){
-	$data = Flight::request()->getData();
-	
-	Query::saveReply($querySlug, $data, $instance);
-	
-	Flight::json(array('ok'=>true));
-});
 
 Flight::route('GET /@userId/@querySlug',function($userId,$querySlug){
 	Flight::json( Query::getQuery($querySlug) );

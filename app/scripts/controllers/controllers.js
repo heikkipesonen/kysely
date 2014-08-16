@@ -1,14 +1,50 @@
-var REST_URL = 'http://192.168.0.10/kysely/backend';
-kyselyControllers
+kysely
+
 	.controller('thanksController', ['$scope', function($scope){
 
 	}])
 
+	.controller('loginController', ['$scope','login', function($scope,login){
+		$scope.user = login;
+	}])
+
+	.controller('usersController', ['$scope','login','$http','idGenerator', function($scope,login,$http, idGenerator){
+		angular.extend($scope,{
+			login:login,
+			users:null,
+			getList:function(){
+				$http.get(REST_URL+'/list/users').success(function(data){
+					$scope.users = data;
+				})
+			},
+			newuser:{
+				password:'',
+				username:''
+			},
+			generatePassword:function(){
+				$scope.newuser.password = idGenerator.id(10);
+			},
+			createUser:function(){
+				$scope.login.create($scope.newuser.username, $scope.newuser.password).success(function(){
+					$scope.newuser.password  = '';
+					$scope.newuser.username = '';
+
+					$scope.getList();
+				});
+
+			}
+		});
+
+		$scope.getList();
+	}])
+
+
+	.controller('browseController', ['$scope','login','$http', function($scope,login,$http){
+		
+
+	}])
+
 	.controller('mainController', ['$scope','login','$http', function($scope,login,$http){
-		$http.get(REST_URL+'/list/'+login.getLogin())
-			.success(function(data){
-				$scope.list = data;
-			})
 
 	}])
 
@@ -44,65 +80,4 @@ kyselyControllers
 		}
 	}])
 
-	.controller('editController', ['$routeParams','$scope','Query','$window','$timeout', function($routeParams,$scope,Query,$window,$timeout){
-		if ($routeParams.slug){
-			$scope.query = Query.get({slug:$routeParams.slug});
-		} else {
-			$scope.query = new Query();
-		}
-		$scope.old = angular.copy($scope.query);
-		$scope.date = Date.now();
-		$scope.edit = true;
-		$scope.showToggle = true;
-
-		$scope.saveQuestion = function(){
-			$scope.query.$save();
-		}
-
-		$scope.toggleEdit = function(){
-			$scope.edit = !$scope.edit;
-		}
-
-		$scope.removeQuestion = function(index){
-			$scope.query.questions.splice(index, 1);
-		}
-
-		$scope.removeAnswer = function(questionIndex, answerIndex){
-			$scope.query.questions[questionIndex].answers.splice(answerIndex, 1);
-		}
-
-		$scope.addAnswer = function(index,type){
-			if (!$scope.query.questions[index].answers){
-				$scope.query.questions[index].answers = [];
-			}
-
-			$scope.query.questions[index].answers.push({
-				name:null,
-				label:null,
-				value:null
-			});
-		}
-
-		$scope.addQuestion = function(){
-			if (!$scope.query.questions){
-				$scope.query.questions = [];
-			}
-
-			$scope.query.questions.push({
-				name:null,
-				label:null,
-				type:'text',
-				answers:null
-			});
-
-			$scope.addAnswer($scope.query.questions.length-1);
-			
-			$timeout(function(){
-				$window.scrollTo(0,$window.document.body.scrollHeight);
-			},100);
-		}
-
-		$scope.submit = function(){
-			$scope.query.submitDate = Date.now();
-		}
-	}])
+	

@@ -1,13 +1,36 @@
-var kyselyControllers = angular.module('kyselyControllers', []);
+var REST_URL = 'http://192.168.0.10/kysely/backend';
 
-var kysely = angular.module('kysely',['kyselyControllers','ngResource','ngRoute','ngResource'])
+var kysely = angular.module('kysely',['ngResource','ngRoute','ngResource','duScroll'])
+   
+   .service('idGenerator', function(){
+	   	this.id = function(length){
+		    var text = "";
+		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+		    for( var i=0; i < length; i++ )
+		        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+		    return text;
+		}
+   })
+
    .config(['$routeProvider',
 
         function($routeProvider) {
-            $routeProvider            
+            $routeProvider
+                .when('/login', {
+                    templateUrl: 'templates/login.html',
+                    controller: 'loginController'
+                })
+
                 .when('/', {
                     templateUrl: 'templates/main.html',
                     controller: 'mainController'
+                })
+                
+                .when('/kayttajat', {
+                    templateUrl: 'templates/users.html',
+                    controller: 'usersController'
                 })
 
                 .when('/kiitos', {
@@ -15,7 +38,7 @@ var kysely = angular.module('kysely',['kyselyControllers','ngResource','ngRoute'
                     controller: 'thanksController'
                 })
 
-                .when('/uusi', {
+                .when('/uusi/:user_id', {
                     templateUrl: 'templates/create.html',
                     controller: 'editController'
                 })
@@ -30,25 +53,19 @@ var kysely = angular.module('kysely',['kyselyControllers','ngResource','ngRoute'
                     controller: 'answerController'
                 })
 
+                .when('/kyselyt/:user_id', {
+                    templateUrl: 'templates/browse.html',
+                    controller: 'browseController'
+                })
+
                 .otherwise({
                     redirectTo: '/'
                 });
     }])
 
-  	.service('login', ['$http', function($http){
-  		this.getLogin = function(){
-  			return 13;
-  		}
-
-  		this.login = function(username, password){
-  			return true;
-  		}
-
-  	}])
-
 	.factory('Query',['$http','$resource','login',function($http,$resource,login){
 		return $resource('http://192.168.0.10/kysely/backend/:userid/:slug', {
-			userid:login.getLogin(),
+			userid:login.id,
 			slug:'@slug'
 		}, {
 			create:{
@@ -65,46 +82,4 @@ var kysely = angular.module('kysely',['kyselyControllers','ngResource','ngRoute'
 				}
 			}
 		});
-	}])
-
-	.directive('footer',function(){
-		// Runs during compile
-		return {
-			// name: '',
-			// priority: 1,
-			// terminal: true,
-			// scope: {}, // {} = isolate, true = child, false/undefined = no change
-			// controller: function($scope, $element, $attrs, $transclude) {},
-			// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
-			restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
-			// template: '',
-			templateUrl: 'templates/footer.html',
-			replace: true,
-			// transclude: true,
-			// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
-			link: function($scope, iElm, iAttrs, controller) {
-				
-			}
-		};
-	})
-
-	.directive('question', function(){
-		// Runs during compile
-		return {
-			// name: '',
-			// priority: 1,
-			// terminal: true,
-			// scope: {}, // {} = isolate, true = child, false/undefined = no change
-			// controller: function($scope, $element, $attrs, $transclude) {},
-			// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
-			restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
-			// template: '',
-			templateUrl: 'templates/question.html',
-			replace: true,
-			// transclude: true,
-			// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
-			link: function($scope, iElm, iAttrs, controller) {
-				
-			}
-		};
-	});
+	}]);

@@ -1,0 +1,24 @@
+.login-window{
+    .login-fields-container{
+        position: relative;
+        padding-left: 100px;
+        padding-top: 5px;
+    }
+
+    i.login-icon{
+        position: absolute;
+        left:0px;
+        top:0px;
+        font-size: 100px;
+    }
+
+    input{
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .imagebutton{
+        float:right;
+        margin: 20px 0px 0px 20px;
+    }
+}

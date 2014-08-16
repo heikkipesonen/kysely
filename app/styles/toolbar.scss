@@ -1,0 +1,199 @@
+$toolbarBgColor : #1d2027;
+$topmenuColor : white;
+$topmenuBgColor: #45c8dc;
+
+$topmenuHeight : 80px;
+$toolbarWidth : 200px;
+
+.topmenu{
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 100%;
+    height: $topmenuHeight;
+    background-color: $topmenuBgColor;
+    color: $topmenuColor;
+}
+
+.query-view{
+    position:absolute;
+    top:$topmenuHeight;
+    left:$toolbarWidth;
+
+    &.no-tools{
+        left:0px;
+    }
+
+    right: 0px;
+    bottom:0px;
+    background-color: #f0f0f0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    color:#6D6D6D;
+    h1,h2,h3,h4{
+        color: #7a7a84;
+    }
+
+    .container{
+        background-color:white;
+        width: 80%;
+        margin:auto;
+        max-width: 700px;
+    }
+}
+
+
+.right{
+    float:right;
+}
+
+.topmenu{
+
+    .user-info{
+        width: 250px;
+        position: absolute;
+        right: 0px;
+        top:0px;
+    
+        overflow: hidden;
+
+        h4{
+            overflow: hidden;
+            width: 200px;
+            text-overflow: ellipsis;
+        }
+
+    }
+
+    li{        
+        display: inline-block;
+        position:relative;
+        height: $topmenuHeight - 20;
+        padding: 10px 20px 10px 0px;
+        text-align: center;
+
+        &.logo-item{
+            background-color: darken($topmenuBgColor, 10);
+            width: $toolbarWidth;
+            padding-right: 0px;
+
+            .item-text{
+                margin-left: 0px;
+                text-align: center;
+            }
+
+            h3{
+                margin-top: 15px;
+                text-transform: uppercase;
+                span{
+                    font-weight: 800;
+                }
+            }
+        }
+
+        .item-text{
+
+            position:relative;            
+            text-align: left;
+            margin-left: 74px;
+        }
+    
+        
+        i{
+            position: absolute;
+            top:10px;
+            left:10px;
+
+            color: white;
+            font-size: $topmenuHeight - 20;
+        }        
+    }
+
+
+    h4{
+        padding: 15px 5px 5px 0px;
+        text-transform: uppercase;
+        font-size: 10pt;
+    }
+
+    p{
+        font-size: 10pt;
+    }
+}
+
+.toolbar{
+    width: $toolbarWidth;
+    bottom: 0px;
+    position:absolute;
+    top:$topmenuHeight;
+    left:0px;
+    color:#DDDDDD;
+    background-color: $toolbarBgColor;
+
+
+    li{
+        background-color: $toolbarBgColor;
+        cursor: pointer;
+        position:relative;
+        
+        &.open{
+            background-color: lighten($toolbarBgColor,30);
+
+           .tool-wrapper{
+                &:hover{
+                    background-color: lighten($toolbarBgColor, 20);
+                }
+            }
+        }
+        
+        .tool-wrapper{
+            padding: 10px 0px 10px 0px;
+    
+            &:hover{
+                background-color: lighten($toolbarBgColor, 10);
+            }
+        }
+        text-align: center;
+        border-bottom: 1px solid lighten($toolbarBgColor, 20);
+
+
+
+        .item-text{
+            position:relative;            
+            text-align: left;
+            height: 60px;
+            margin-left: 64px;
+        }
+    
+        
+        i{
+            position: absolute;
+            top:20px;
+            left:10px;
+
+            color: white;
+            font-size: 42px;
+        }
+
+        .submenu{
+
+            .tool-wrapper{
+                &:hover{
+                    background-color: lighten($toolbarBgColor, 20);
+                }                
+            }
+        }   
+    }
+
+
+    h4{
+        padding: 15px 5px 5px 0px;
+        text-transform: uppercase;
+        font-size: 10pt;
+    }
+
+    p{
+        font-size: 10pt;
+    }
+}

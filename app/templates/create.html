@@ -1,27 +1,31 @@
-<div class="question-wrapper" ng-class="{true:'edit',false:''}[edit]" ng-controller="editController">
+<div class="query-view">
 
-	<div class="question-toolbar">
-		<a href="#/"><button><i class="fa fa-home"></i></button></a>
-		<button ng-if="edit" ng-click="toggleEdit()"><fa class="fa fa-eye"></fa></button>
-		<button ng-if="!edit" ng-click="toggleEdit()"><i class="fa fa-edit"></i></button>
-	    <button ng-click="saveQuestion()"><i class="fa fa-floppy-o"></i></button>
-	</div>
-
-    <div class="question-header">
-	    <h2 ng-if="!query.title">Ei nimeä</h2>
-	    <h2 ng-if="query.title">{{query.title}}</h2>
-	    <p ng-if="edit">Kyselyn nimi / otsikko:</p>
-	    <input class="question-edit question-header" type="text" ng-if="edit" ng-model="query.title">
-    </div>
-
-	<div class="guide-text-container" ng-if="edit">
-		<p>Kirjoita halutessasi kyselyn täyttäjälle lyhyt ohjeteksti</p>
-		<textarea ng-model="query.text" placeholder="ohjeteksti"></textarea>
-	</div>
-
-    <div class="questions-container container" ng-repeat="(questionIndex, question) in query.questions">
-        <question>
-    </div>
+	<div class="container">					
+	    <h2 class="page-title" ng-if="!query.title">Ei nimeä</h2>
+	    <h2 class="page-title" ng-if="query.title">{{query.title}}</h2>
 	
-	<button ng-if="edit" class="add-new-question submit" ng-click="addQuestion()"><i class="fa fa-plus"></i></button>
+
+		<div class="input-group">
+			
+		    <div class="input-field">
+			    <label>Kyselyn nimi</label>
+			    <input class="question-edit question-header" type="text" ng-model="query.title">
+		    </div>
+		
+			<div class="input-field guide-text-container">
+				<label>Ohjeteksti</label>
+				<textarea ng-model="query.text" placeholder="ohjeteksti"></textarea>
+			</div>
+		</div>
+
+	    <div class="questions-container input-group" ng-repeat="(questionIndex, question) in query.questions">
+	    		
+	        <question>
+	    	
+	    </div>
+
+	</div>
 </div>
+
+
+<toolbar></toolbar>

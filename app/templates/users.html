@@ -1,0 +1,46 @@
+<div class="query-view">
+	<div class="container">		
+		<h2 class="page-title"><span></span>käyttäjät</h2>
+	</div>
+
+
+	<div class="container users-list list">
+		<h3>käyttäjät</h3>
+		<table>
+			<tr>
+				<th></th>
+				<th>id</th>
+				<th>nimi</th>
+				<th>taso</th>
+			</tr>
+			<tr class="user" ng-repeat="user in users">
+				<td><i class="icon ion-ios7-contact-outline"></i></td>
+				<td>{{user.id}}</td>
+				<td>{{user.username}}</td>
+				<td>{{user.level}}</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="container">
+		<h3>luo uusi käyttäjä</h3>
+		<div class="add-users container input-field">
+			<div class="with-button">			
+				<input class="wide" type="text" ng-model="newuser.username" placeholder="sähköposti@osoite.com">
+			</div>
+			
+			<div class="with-button">				
+				<imagebutton image="ion-ios7-cog" ng-click="generatePassword();"></imagebutton>
+				<input class="wide" type="text" ng-model="newuser.password" placeholder="salasana">
+			</div>
+			
+			<div class="center">				
+				<imagebutton image="ion-ios7-plus" ng-click="createUser()"></imagebutton>
+			</div>
+		</div>		
+	</div>
+
+
+</div>
+
+<toolbar></toolbar>

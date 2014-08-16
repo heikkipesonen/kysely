@@ -6,7 +6,8 @@
     "angular": "~1.2.21",
     "angular-resource": "~1.2.21",
     "angular-route": "~1.2.21",
-    "font-awesome": "~4.1.0"
+    "ionicons": "~1.5.2",
+    "angular-scroll": "~0.6.1"
   },
   "devDependencies": {}
 }

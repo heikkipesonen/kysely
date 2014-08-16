@@ -1,0 +1,99 @@
+input,textarea,select{
+	outline:none;
+	border:none;
+
+	background-color: rgba(231,231,231,1);
+	padding: 8px;
+	font-size: 11pt;
+
+	box-sizing: border-box; /* css3 rec */
+	-moz-box-sizing: border-box; /* ff2 */
+	-ms-box-sizing: border-box; /* ie8 */
+	-webkit-box-sizing: border-box; /* safari3 */
+	-khtml-box-sizing: border-box; /* konqueror */	
+
+	&:active{
+		outline: none;
+	}
+
+	display:block;
+	resize:none;
+}
+
+.input-field{
+	display:block;
+	position:relative;
+	margin-bottom: 20px;
+	
+	label{
+		display: block;		
+	}
+
+	input,textarea,select{
+		width: 100%;
+		margin: 10px 10px 10px 0%;
+	}		
+}
+
+textarea{
+	height: 200px;
+}
+
+.input-group{
+	padding: 30px;
+	border-bottom: 1px solid #aaa;
+}
+
+.with-button{
+	position:relative;
+	padding-right: 40px;
+	.imagebutton{
+		position: absolute;
+		right: 0px;
+	}
+}
+
+.imagebutton{
+	position:relative;
+	display:inline-block;
+	vertical-align:bottom;
+
+	width: 34px;
+	height: 34px;
+	cursor: pointer;
+
+	&.labeled{
+		width: auto;
+	}
+
+	label{
+		display: block;
+		padding: 10px 10px 10px 36px;
+	}
+
+	i{
+		position:absolute;
+		top:1px;
+		left:1px;
+		width: 100%;
+		font-size: 32px;
+		color: black;
+	}
+
+	i.normal{
+		opacity: 1;
+	}
+
+	i.hover{
+		opacity: 0;
+	}
+
+	&:hover{
+		i.normal{
+			opacity: 0;	
+		}
+		i.hover{
+			opacity: 1;			
+		}
+	}
+}

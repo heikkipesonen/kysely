@@ -1,56 +1,76 @@
-<div class="question question-field" ng-class="{true:'editable',false:'no-edit'}[edit]" id="{{id}}">
-	<span class="question-index">{{$index +1 }}</span>
-	<h3>{{question.label}}</h3>
-
-	<div class="input-field" ng-if="edit">	
-		<label for="question-label-edit-{{question.label}}-{{$index}}">Otsikko</label>
-		<input id="question-label-edit-{{question.label}}-{{$index}}" class="question-edit question-title" type="text" ng-model="question.label">
-	</div>
+<div class="question question-field" id="{{question.name}}">
 	
-	<div class="input-field" ng-if="edit">
-		<label for="question-name-edit-{{question.name}}-{{$index}}">Nimi</label>
-		<input name id="question-name-edit-{{question.name}}-{{$index}}" class="question-edit" type="text" ng-model="question.name">
-	</div>
-
-	<div class="input-field" ng-if="edit">
-		<label ng-if="edit" for="question-label-edit-{{question.label}}-{{$index}}">Tyyppi</label>
-		<select class="question-edit" ng-model="question.type" ng-if="edit">
-			<option value="text">Tekstikenttä</option>
-			<option value="textarea">Tekstialue</option>
-			<option value="checkbox">Monivalinta</option>
-			<option value="radio">Valinta</option>
-		</select>
-	</div>
-
-	<div class="question-items-container" ng-class="question.type" >	
+	<div class="editquestion" ng-if="edit">
 		
-		<div class="question-item question-{{question.type}}" ng-switch="question.type" ng-repeat="answer in question.answers">
-
-			<p for="{{answer.name}}-{{$index}}" ng-if="!edit && (question.type == 'text' || question.type=='textarea')">{{answer.label}}</p>
-
-			<input ng-if="!edit" id="{{answer.name}}-{{$index}}" name="{{answer.name}}" ng-model="answer.value" type="checkbox" ng-switch-when="checkbox">
-			<input ng-if="!edit" id="{{answer.name}}-{{$index}}" name="{{answer.name}}" ng-model="answer.value" value="{{answer.value}}" type="radio" ng-switch-when="radio">
-			<input ng-if="!edit" id="{{answer.name}}-{{$index}}" name="{{answer.name}}" ng-model="question.value" type="text" ng-switch-when="text">
-			<textarea ng-if="!edit" id="{{answer.name}}-{{$index}}" name="{{answer.name}}" ng-model="answer.value" type="text" ng-switch-when="textarea"></textarea>
-			
-
-			<label for="{{answer.name}}-{{$index}}" ng-if="!edit && (question.type == 'checkbox' || question.type=='radio')">{{answer.label}}</label>
-
-			<div class="input-field" ng-if="edit && question.type != 'radio'" >				
-				<label for="{{answer.name}}-{{$index}}">Nimi</label>
-				<input name id="answer-name-{{answer.name}}-{{$index}}" class="question-edit question-label" type="text" placeholder="kentän nimi" ng-model="answer.name">
-			</div>
-
-			<div class="input-field" ng-if="edit">
-				<label for="answer-label-{{answer.name}}-{{$index}}">Kysymys</label>
-				<input id="answer-label-{{answer.name}}-{{$index}}"class="question-edit question-label" ng-if="edit" type="text" placeholder="label" ng-model="answer.label">
-			</div>
-
-			<span class="remove" ng-if="edit && (question.type == 'checkbox' || question.type=='radio')" ng-click="removeAnswer(questionIndex, $index)"><i class="fa fa-trash-o"></i></span>
+		<div class="question-control">
+			<imagebutton image="ion-ios7-minus" ng-click="question.minimized = !question.minimized"></imagebutton>
+			<imagebutton image="ion-ios7-compose" ng-click="question.compose = !question.compose; question.minimized = false;"></imagebutton>
+			<imagebutton image="ion-ios7-close" ng-click="removeQuestion($index)"></imagebutton>
 		</div>
 		
-		<button class="add-new-answer" ng-if="edit" ng-click="addAnswer($index, question.type)"><i class="fa fa-plus"></i></button>
+		<div class="title-container">		
+			<h2 class="question-type"><span>{{question.type}}:</span>{{question.label}}</h2>
+		</div>
+
+		<div class="center" ng-if="question.minimized">		
+			<div class="more icon" ng-click="question.minimized = false">
+				<i class="ion ion-ios7-more-outline"></i>
+			</div>
+		</div>
+
+
+		<div class="input-field" ng-if="question.compose && !question.minimized">
+			<label for="question-label-edit-{{question.label}}-{{$index}}">Teksti</label>
+			<input id="question-label-edit-{{question.label}}-{{$index}}" class="question-edit question-title" type="text" ng-model="question.label">
+		</div>
+		
+		<div class="input-field" ng-if="question.compose && !question.minimized">
+			<label for="question-name-edit-{{question.name}}-{{$index}}">Ohjeteksti</label>
+			<textarea id="question-name-edit-{{question.name}}-{{$index}}" class="question-edit" type="text" ng-model="question.text"></textarea>
+		</div>
+
+
+		<div class="question-items-container" ng-if="question.compose && !question.minimized" ng-class="question.type" >	
+			
+			<div class="question-edit question-{{question.type}}" ng-switch="question.type" ng-repeat="answer in question.answers">
+				<checkbox ng-switch-when="checkbox" edit="edit" answer="answer"></checkbox>
+				<radio ng-switch-when="radio" edit="edit" answer="answer" question="question"></radio>
+
+
+				<label class="label-input-label" ng-if="question.type === 'text' || question.type==='textarea'">{{$index+1}}</label>
+				<input class="label-input" ng-if="question.type === 'text' || question.type==='textarea'" placeholder="label" type="text" ng-model="answer.label">
+				
+
+				<imagebutton image="ion-ios7-close" ng-click="removeAnswer(questionIndex, $index)"></imagebutton>
+			</div>
+
+			<div class="center question-tools-container">
+				<imagebutton image="ion-ios7-plus" ng-click="addAnswer($index)"></imagebutton>
+			</div>		
+		</div>
+
+	
 	</div>
 
-	<span class="remove" ng-if="edit" ng-click="removeQuestion($index)"><i class="fa fa-trash-o"></i></span>
+
+	<div class="question-wrapper question-item" ng-if="!question.compose && !question.minimized">
+	
+		<h3>{{question.label}}</h3>
+		
+		<div class="question-textcontainer">		
+			<p ng-if="question.text">{{question.text}}</p>
+		</div>
+
+		<div class="question-items-container" ng-class="question.type">		
+			<div class="question-item question-{{question.type}}" ng-switch="question.type" ng-repeat="answer in question.answers">
+				<checkbox ng-switch-when="checkbox" answer="answer"></checkbox>
+				<radio ng-switch-when="radio" answer="answer" question="question"></radio>
+
+				<label ng-if="question.type === 'text' || question.type==='textarea'">{{answer.label}}</label>
+				<textarea ng-model="answer.value" ng-switch-when="textarea" placeholder="{{answer.label}}"></textarea>
+				<input type="text" ng-model="answer.value" ng-switch-when="text" placeholder="{{answer.label}}"></text>
+			</div>	
+		</div>		
+	</div>
+
 </div>
