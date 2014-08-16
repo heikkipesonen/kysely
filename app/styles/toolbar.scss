@@ -1,22 +1,19 @@
 
 $menuBG : #2a2c33;
 $menuButtonSelected : #57dce4;
-
+$menuActiveButton : #3492E9;
 
 .main-menu{
 	position: absolute;
 	top:0;
 	left:0px;
 	width: auto;
-	height: 100%;
-	background-color: $menuBG;
-	color: white;
-	overflow: hidden;
-
-
+	
 	.imagebutton, .imagebutton.labeled{
-		height: 19%;
 		margin:0;
+		border-bottom: 2px solid lighten($menuBG, 10);
+		margin-top: -2px;
+		height: 20%;
 		padding:0;
 		display: block;
 		width: 200px;
@@ -35,15 +32,80 @@ $menuButtonSelected : #57dce4;
 			position: absolute;
 			bottom: 25px;
 		}
+	}
+}
 
+.toolbar{
+	height: 100%;
+	background-color: $menuBG;
+	color: white;
+
+	li,.imagebutton{
+		transition-duration: 0.3s;
 
 		&:hover{
-			background-color: lighten($menuBG, 15);			
+			background-color: lighten($menuBG, 15);
 		}
 
 		&.selected{
-			background-color: $menuButtonSelected;
+			//background-color: lighten($menuBG, 10);
+
+			background: $menuActiveButton;
+
+			$size: 8px;
+			&:after{
+				transition-duration: 0.3s;
+				content:"";
+				position: absolute;
+				top:50%;
+				margin-top: -$size;
+				right:-$size;
+				border-left: $size solid $menuActiveButton;
+				border-top: $size solid transparent;
+				border-bottom: $size solid transparent;
+				z-index: 10;
+			}
+		
+			&:hover{
+				background-color: lighten( $menuActiveButton, 10);
+				
+				&:after{
+					border-left: $size solid lighten( $menuActiveButton, 10);
+				}
+			}
+
+
 		}
 	}
 
+	&.small-menu{
+		background-color: lighten($menuBG, 10);
+		.imagebutton, .imagebutton .image-wrapper{
+			width: 64px;
+			height: 64px;
+			color: white;
+			i{
+				top:13px;
+				font-size: 40px;
+			}
+		}
+	}
+}
+
+.query-view .toolbar{
+	$toolbarColor : $menuActiveButton;
+
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	width: 100%;
+	height: 64px;
+	text-align:center;
+	background-color: $toolbarColor;
+	overflow: hidden;
+	.imagebutton{
+		&:hover{
+			background-color: lighten($toolbarColor,10);
+		}
+	}
 }

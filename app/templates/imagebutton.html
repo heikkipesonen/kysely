@@ -1,5 +1,5 @@
-<div class="imagebutton" ng-class="{labeled : label}">
-	<a href="#/{{link}}" ng-if="link">
+<div class="imagebutton" ng-class="{'labeled': label, 'selected' : path === link && link && path}">
+	<a href="#{{link}}" ng-if="link">
 		<div class="link-wrap">
 			
 		<div class="image-wrapper">
@@ -14,6 +14,6 @@
 		<i class="{{image}} normal"></i>
 	</div>
 
-	<label ng-if="!link" ng-if="label">{{label}}</label>
+	<label ng-if="!link && label">{{label}}</label>
 
 </div>

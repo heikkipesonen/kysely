@@ -58,8 +58,8 @@ kysely.directive('checkbox', function(){
 			// terminal: true,
 			scope: {
 				image:'@',
-				imagehover:'@',
 				action:'=',
+				path:'=',
 				link:'@',
 				label:'@'
 			}, // {} = isolate, true = child, false/undefined = no change

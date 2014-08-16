@@ -45,7 +45,7 @@ kysely.controller('editController',
 				try{
 
 					$timeout(function(){			
-						var view = $('.query-view'),
+						var view = $('.query-inner-container'),
 							e = $('#'+q.name);
 
 						view.scrollToElement(e,null,300)

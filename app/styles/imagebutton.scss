@@ -10,7 +10,7 @@
 	vertical-align:bottom;
 
 	cursor: pointer;
-
+	transition-duration: 0.3s;
 	.link-wrap{
 		position: absolute;
 		top:0px;
@@ -63,6 +63,6 @@
 
 
 	&:hover{
-		opacity: 0.8;		
+	
 	}
 }
