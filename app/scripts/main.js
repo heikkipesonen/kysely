@@ -28,37 +28,7 @@ var kysely = angular.module('kysely',['ngResource','ngRoute','ngResource','duScr
                     controller: 'mainController'
                 })
                 
-                .when('/kayttajat', {
-                    templateUrl: 'templates/users.html',
-                    controller: 'usersController'
-                })
-
-                .when('/kiitos', {
-                    templateUrl: 'templates/thanks.html',
-                    controller: 'thanksController'
-                })
-
-                .when('/uusi/:user_id', {
-                    templateUrl: 'templates/create.html',
-                    controller: 'editController'
-                })
-
-                .when('/muokkaa/:slug', {
-                    templateUrl: 'templates/create.html',
-                    controller: 'editController'
-                })
-
-                .when('/kysely/:slug', {
-                    templateUrl: 'templates/answer.html',
-                    controller: 'answerController'
-                })
-
-                .when('/kyselyt/:user_id', {
-                    templateUrl: 'templates/browse.html',
-                    controller: 'browseController'
-                })
-
-                .otherwise({
+                 .otherwise({
                     redirectTo: '/'
                 });
     }])

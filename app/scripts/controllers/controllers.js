@@ -4,40 +4,6 @@ kysely
 
 	}])
 
-	.controller('loginController', ['$scope','login', function($scope,login){
-		$scope.user = login;
-	}])
-
-	.controller('usersController', ['$scope','login','$http','idGenerator', function($scope,login,$http, idGenerator){
-		angular.extend($scope,{
-			login:login,
-			users:null,
-			getList:function(){
-				$http.get(REST_URL+'/list/users').success(function(data){
-					$scope.users = data;
-				})
-			},
-			newuser:{
-				password:'',
-				username:''
-			},
-			generatePassword:function(){
-				$scope.newuser.password = idGenerator.id(10);
-			},
-			createUser:function(){
-				$scope.login.create($scope.newuser.username, $scope.newuser.password).success(function(){
-					$scope.newuser.password  = '';
-					$scope.newuser.username = '';
-
-					$scope.getList();
-				});
-
-			}
-		});
-
-		$scope.getList();
-	}])
-
 
 	.controller('browseController', ['$scope','login','$http', function($scope,login,$http){
 		
