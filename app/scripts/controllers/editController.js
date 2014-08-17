@@ -83,4 +83,8 @@ kysely.controller('editController',
 				$scope.edit = !$scope.edit;
 			}
 		});
+
+	$scope.addQuestion('text');
+	$scope.addQuestion('checkbox');
+	$scope.addQuestion('radio');
 	}]);

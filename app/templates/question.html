@@ -3,32 +3,36 @@
 	<div class="editquestion" ng-if="edit">
 		
 		<div class="question-control">
-			<imagebutton image="ion-ios7-minus" ng-click="question.minimized = !question.minimized"></imagebutton>
-			<imagebutton image="ion-ios7-compose" ng-click="question.compose = !question.compose; question.minimized = false;"></imagebutton>
-			<imagebutton image="ion-ios7-close" ng-click="removeQuestion($index)"></imagebutton>
+			<imagebutton image="ion-ios7-minus-outline" ng-click="question.minimized = !question.minimized"></imagebutton>
+			<imagebutton image="ion-ios7-compose-outline" ng-click="question.compose = !question.compose; question.minimized = false;"></imagebutton>
+			<imagebutton image="ion-ios7-close-outline" ng-click="removeQuestion($index)"></imagebutton>			
 		</div>
 		
-		<div class="title-container">		
-			<h2 class="question-type"><span>{{question.type}}:</span>{{question.label}}</h2>
-		</div>
-
-		<div class="center" ng-if="question.minimized">		
-			<div class="more icon" ng-click="question.minimized = false">
-				<i class="ion ion-ios7-more-outline"></i>
+		<div class="question-main">
+			
+		
+			<div class="title-container">		
+				<h2 class="question-type"><span>{{question.type}}:</span>{{question.label}}</h2>
 			</div>
-		</div>
+
+			<div class="center" ng-if="question.minimized">		
+				<div class="more icon" ng-click="question.minimized = false">
+					<i class="ion ion-ios7-more-outline"></i>
+				</div>
+			</div>
 
 
-		<div class="input-field" ng-if="question.compose && !question.minimized">
-			<label for="question-label-edit-{{question.label}}-{{$index}}">Teksti</label>
-			<input id="question-label-edit-{{question.label}}-{{$index}}" class="question-edit question-title" type="text" ng-model="question.label">
-		</div>
+			<div class="input-field" ng-if="question.compose && !question.minimized">
+				<label for="question-label-edit-{{question.label}}-{{$index}}">Teksti</label>
+				<input id="question-label-edit-{{question.label}}-{{$index}}" class="question-edit question-title" type="text" ng-model="question.label">
+			</div>
+			
+			<div class="input-field" ng-if="question.compose && !question.minimized">
+				<label for="question-name-edit-{{question.name}}-{{$index}}">Ohjeteksti</label>
+				<textarea id="question-name-edit-{{question.name}}-{{$index}}" class="question-edit" type="text" ng-model="question.text"></textarea>
+			</div>
 		
-		<div class="input-field" ng-if="question.compose && !question.minimized">
-			<label for="question-name-edit-{{question.name}}-{{$index}}">Ohjeteksti</label>
-			<textarea id="question-name-edit-{{question.name}}-{{$index}}" class="question-edit" type="text" ng-model="question.text"></textarea>
 		</div>
-
 
 		<div class="question-items-container" ng-if="question.compose && !question.minimized" ng-class="question.type" >	
 			
@@ -41,11 +45,11 @@
 				<input class="label-input" ng-if="question.type === 'text' || question.type==='textarea'" placeholder="label" type="text" ng-model="answer.label">
 				
 
-				<imagebutton image="ion-ios7-close" ng-click="removeAnswer(questionIndex, $index)"></imagebutton>
+				<imagebutton image="ion-ios7-close-outline" ng-click="removeAnswer(questionIndex, $index)"></imagebutton>
 			</div>
 
 			<div class="center question-tools-container">
-				<imagebutton image="ion-ios7-plus" ng-click="addAnswer($index)"></imagebutton>
+				<imagebutton image="ion-ios7-plus-outline" ng-click="addAnswer($index)"></imagebutton>
 			</div>		
 		</div>
 
