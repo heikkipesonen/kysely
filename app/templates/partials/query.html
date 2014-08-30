@@ -1,3 +1,41 @@
-<div class="questions-list" ng-repeat="(questionindex, question) in query.questions">
-	<question question="question"></question>
+<div class="query">
+	<div class="query-settings container">
+		
+		<div class="header">
+			<h4 ng-class="{'placeholder' : !query.title}"><span class="type">QUERY:</span>{{query.title || 'No Title!'}}</h4>
+		</div>
+
+		<div class="control">
+			<button ng-class="{'selected' : edit}" ng-click="toggleEdit();">
+				<i ng-if="!edit" class="ion-ios7-compose-outline"></i>
+				<i ng-if="edit" class="ion-ios7-compose"></i>
+			</button>
+
+			<button ng-click="save()">
+				<i class="ion-ios7-cloud-upload-outline"></i>
+			</button>
+
+			<button ng-click="remove()">
+				<i class="ion-ios7-trash-outline"></i>
+			</button>
+
+		</div>	
+
+
+		<textinput ng-if="edit" label="Title" model="query.title" type="text"></textinput>
+		<textareainput ng-if="edit" label="Introduction text" model="query.text"></textareainput>
+
+		<div class="statistic center padded">
+			<h4>{{query.questions.length}} questions</h4>
+		</div>
+	</div>
+
+
+	<div class="questions-list">
+		<question  ng-repeat="question in query.questions" control="edit" question="question" questionindex="{{$index}}"></question>
+	</div>
+
+	<div class="bottom-toolbar">
+		<button ng-click="addQuestion()"><i class="ion-ios7-plus-outline"></i></button>
+	</div>
 </div>

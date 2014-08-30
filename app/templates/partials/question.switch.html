@@ -1,9 +1,10 @@
-<label>
+<label class="switch-input" ng-class="type">
+	<input type="{{type}}" name="{{name}}" value="{{value}}" ng-model="model"></input>
+	
 	<div class="indicator-container">
 		<div class="indicator"></div>
 	</div>
 
-	<input type="{{input.type}}" name="{{input.name}}" ng-model="input.value"></input>
 
-	{{input.label}}
+	{{label}}
 </label>

@@ -8,13 +8,38 @@ body, html, button, input, label, textarea {
     font-weight: 200;
 }
 
+h1,h2,h3{
+    font-weight: 100;
+}
+
+h1{
+    font-size: 34pt;
+}
+
+h2{
+    font-size: 26pt;
+}
+
+h3{
+    font-size: 20pt;
+}
+
+h4{
+    font-size: 11pt;
+    font-weight: bold;
+}
+
 a{
     color:white;
     text-decoration: none;
 }
 
 .animate{
-    @include prefix("transition-duration","0.3s");
+    @include prefix("transition-duration","0.23s");
+}
+
+.center{
+    text-align: center;
 }
 
 #wrapper{
@@ -34,6 +59,13 @@ a{
     width: 100%;
     background-color: #ddd;
     vertical-align: top;
+
+    .view{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+    }
 }
 
 td.fit-content{
@@ -42,4 +74,6 @@ td.fit-content{
 }
 
 @import "_input";
+@import "_texts";
+@import "_question";
 @import "_menu";

@@ -1,0 +1,185 @@
+input, select, textarea{
+	font-size: 11pt;
+	resize:none;
+	border: 1px solid #ddd;
+
+	box-sizing: border-box;
+	outline:none;
+	-webkit-appearance: none;
+
+	&:focus{
+		outline:none;
+	}
+}
+
+.input-container{
+	display: inline-block;
+	position:relative;
+	padding: 5px;
+
+
+	.input-field-container{
+		border: 1px solid #ddd;
+		padding: 10px;
+		vertical-align: middle;
+	
+		input{
+			height: 100%;
+		}
+
+		input,textarea{
+			width: 100%;
+			display: block;
+			border: none;			
+		}
+
+	}
+}
+
+textarea{
+	height: 150px;
+}
+
+
+button{
+	@extend .animate;
+	background-color:transparent;
+	outline:none;
+	border: none;
+	display: inline-block;
+	cursor: pointer;
+	height: 64px;
+	width: 64px;
+
+	&:hover{
+		outline: none;
+		border:none;
+		color: #5BA0EB;
+	}
+
+	&:active{
+		outline:none;
+		background-color: transparent;
+	}
+
+	i{
+		font-size: 42px;
+	}
+}
+
+
+td.input-label{
+	vertical-align:top;
+	padding: 10px;
+
+}
+
+
+.switch-input{
+	position: relative;
+	display:inline-block;
+	cursor: pointer;
+	box-sizing: border-box;
+
+	padding-bottom:1em;
+
+	input{
+		display: none;
+	}
+
+
+	$size : 24px;	
+
+	.indicator-container{
+		@extend .animate;
+		
+
+		position:relative;
+		display: inline-block;
+		
+		top: 0.5em;
+		left: 0;
+		width: 2*$size;
+		height: $size;
+		
+		margin-right: 0.2em;
+		background-color: #ccc;		
+		border-radius: $size;
+		//box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.3);
+		
+
+		border: 1px solid #aaa;
+
+		.indicator{
+			@extend .animate;
+
+			background-color: white;
+			position: absolute;
+			left:0px;
+			top:0px;
+		
+			width: $size;
+			height: $size;
+			border-radius: $size/2;
+		}
+	}
+
+	input:checked + .indicator-container{
+		background-color: #5BA0EB;
+
+		.indicator{
+			left: $size;
+		}
+	}
+}
+
+.switch-input.radio{
+	
+	margin:0;
+	width: auto;		
+	margin-right: 1em;
+	z-index: 1;
+
+	$size : 24px;
+
+	.indicator-container{
+		z-index: -1;
+		width: $size;
+		height: $size;
+		margin-right: 0.2em;
+
+		border-radius: 50%;
+		background-color: fade_out(#ddd, 0.7);
+		border: 1px solid #ddd;
+
+		.indicator{
+			opacity:0;
+			left:4px;
+			top:4px;
+			
+			height: $size - 8px;
+			width: $size - 8px;
+
+			border-radius:50%;
+		}
+	}
+
+
+	input:checked + .indicator-container{
+		
+		background-color: fade_out(#5BA0EB, 0.5);
+		
+		.indicator{
+			opacity:1;
+			left: 4px;
+			background-color: #5BA0EB;
+			
+		}
+	}
+}
+
+.input-group{
+	margin:0;
+	
+
+}

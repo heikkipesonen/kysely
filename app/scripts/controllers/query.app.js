@@ -1,14 +1,14 @@
-Query.controller('queryAppController', ['$scope','$element', function($scope,$element){
+Query.controller('queryAppController', ['$rootScope','$scope','$element', function($rootScope, $scope,$element){
 	
-
-
-	angular.extend($scope, {
+	angular.extend($rootScope,{
 		login:true,
+		
+		questionTypes:['text','radio','checkbox','textarea'],
 
 	   	getId:function(length){
 
 	   		if (!length) length = 32;
-	   		
+
 		    var text = "";
 		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -17,5 +17,9 @@ Query.controller('queryAppController', ['$scope','$element', function($scope,$el
 
 		    return text;
 		}
+	});
+
+	angular.extend($scope, {
+
 	});
 }]);
