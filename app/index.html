@@ -24,10 +24,19 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-<div id="wrapper" ng-app="kysely">
-    <div class="query-wrapper" ng-view></div>
-    <mainmenu></mainmenu>
-</div>
+<table id="wrapper" ng-app="kysely" ng-controller="queryAppController">
+    
+        <tr>
+            <td ng-if="login" class="fit-content">
+                <menu></menu>
+            </td>
+
+            <td class="view-wrapper" ng-view>
+                
+            </td>
+        </tr>
+    
+</table>
 
 
         <!-- build:js scripts/vendor.js -->
@@ -54,11 +63,23 @@
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/md5.js"></script>
         <script src="scripts/main.js"></script>
-        <script src="scripts/login.js"></script>
-        <script src="scripts/directives.js"></script>
-        <script src="scripts/controllers/controllers.js"></script>
-        <script src="scripts/controllers/editController.js"></script>
-        <script src="scripts/controllers/menuController.js"></script>
+        <script src="scripts/controllers/query.edit.js"></script>
+        <script src="scripts/controllers/query.app.js"></script>
+
+        <script src="scripts/controllers/query.menu.js"></script>
+        <script src="scripts/directives/query.menu.js"></script>
+
+
+        <script src="scripts/services/query.query.js"></script>
+
+        <script src="scripts/directives/query.js"></script>
+        <script src="scripts/directives/query.question.js"></script>
+        <script src="scripts/directives/query.input.switch.js"></script>
+        <script src="scripts/directives/query.input.js"></script>
+        
+        
+
+        
         <!-- endbuild -->
 </body>
 </html>

@@ -1,0 +1,18 @@
+<div class="question-container" id="{{question.id}}" data-index="{{questionindex}}">
+	
+
+	<div class="question-header">
+		<h2>{{question.title}}</h2>
+		
+		<p>{{question.text}}</p>
+	</div>
+
+	<div class="question-answers">
+		<div class="answer-item" ng-repeat="answer in question.answers">
+			
+			<switch ng-if="question.type === 'radio' || question.type === 'checkbox'" input="answer"></switch>
+
+			<textinput ng-if="question.type==='text'" input="answer"></textinput>
+		</div>
+	</div>
+</div>

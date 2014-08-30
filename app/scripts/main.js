@@ -1,31 +1,19 @@
 var REST_URL = 'http://192.168.0.10/kysely/backend';
 
-var kysely = angular.module('kysely',['ngResource','ngRoute','ngResource','duScroll'])
+var Query = angular.module('kysely',['ngResource','ngRoute','ngResource','duScroll'])
    
-   .service('idGenerator', function(){
-	   	this.id = function(length){
-		    var text = "";
-		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-		    for( var i=0; i < length; i++ )
-		        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-		    return text;
-		}
-   })
-
    .config(['$routeProvider',
 
         function($routeProvider) {
             $routeProvider
 
                 .when('/', {
-                    templateUrl: 'templates/main.html',
-                    controller: 'mainController'
+                    templateUrl: 'templates/query.view.main.html',
+                    controller: ''
                 })
                 
                 .when('/create', {
-                    templateUrl: 'templates/create.html',
+                    templateUrl: 'templates/query.view.edit.html',
                     controller: 'editController'
                 })
 
