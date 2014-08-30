@@ -51,6 +51,26 @@ button{
 	height: 64px;
 	width: 64px;
 
+	&.textbutton{
+		font-size: 10pt;
+
+		position:relative;
+		height: auto;
+		width: auto;
+		padding: 15px;
+		padding-left: 3em;
+		
+
+		i{
+			position:absolute;
+			top: 50%;
+			margin-top: -0.55em;
+			left:0.5em;
+
+			font-size: 2em;
+		}
+	}
+
 	&:hover{
 		outline: none;
 		border:none;
@@ -72,8 +92,26 @@ td.input-label{
 	vertical-align:top;
 	padding: 10px;
 
+	&.no-label{
+		padding:4px;
+	}
 }
 
+
+
+.input-field.textarea{
+	position:relative;
+	display: block;
+
+	label{
+		display: block;
+		padding: 0px 0px 15px 0px;
+	}
+
+	textarea{
+		width: 100%;
+	}
+}
 
 .switch-input{
 	position: relative;

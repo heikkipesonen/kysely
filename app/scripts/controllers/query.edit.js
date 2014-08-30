@@ -1,4 +1,4 @@
-Query.controller('editController', ['$rootScope','$scope','query', function($rootScope, $scope, query){
+Query.controller('editController', ['$rootScope','$scope','query','$routeParams', function($rootScope, $scope, query, $routeParams){
 	
 	angular.extend($scope, {
 		query: null,
@@ -18,7 +18,7 @@ Query.controller('editController', ['$rootScope','$scope','query', function($roo
 
 
 	});
-
+console.log($routeParams)
 	$scope.create();
 
 

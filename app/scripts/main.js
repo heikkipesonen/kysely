@@ -12,10 +12,31 @@ var Query = angular.module('kysely',['ngResource','ngRoute','ngResource','duScro
                     controller: ''
                 })
                 
-                .when('/create', {
+                .when('/edit', {
+                    templateUrl: 'templates/query.view.list.html',
+                    controller: 'listController'
+                })
+
+                .when('/edit/:id', {
                     templateUrl: 'templates/query.view.edit.html',
                     controller: 'editController'
                 })
+
+                .when('/start', {
+                    templateUrl: 'templates/query.view.start.html',
+                    controller: 'startController'
+                })
+
+                .when('/users', {
+                    templateUrl: 'templates/query.view.users.html',
+                    controller: 'usersController'
+                })
+
+                .when('/analytics', {
+                    templateUrl: 'templates/query.view.analytics.html',
+                    controller: 'analyticsController'
+                })
+
 
                  .otherwise({
                     redirectTo: '/'

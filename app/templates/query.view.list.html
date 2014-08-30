@@ -1,0 +1,40 @@
+<div class="content query">
+
+
+	<div class="control">
+		<button ng-click="getList()"><i class="ion-ios7-refresh-empty"></i></button>
+		<button ng-click="createNew()"><i class="ion-ios7-plus-empty"></i></button>
+	</div>
+
+	<div class="container">
+		<div class="header">
+			<h4>Queries</h4>
+			<p>BEHOLD: A list of created queries</p>
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="header">
+			<h4>Filter list</h4>
+			<p>Search queries from the list</p>
+		</div>
+		<textinput label="Filter" model="listFilter" type="text"></textinput>
+	</div>
+
+	<ul class="container query-list list">
+
+		<a href="#/edit/{{query.id}}" ng-repeat="query in list | filter:listFilter">
+			<li class="list-item hover animate">
+				
+
+				<i></i>
+
+				<h4><span class="number">{{$index+1}}</span> : {{query.name}}</h4>
+				<p>{{query.text}}</p>
+			</li>
+		</a>
+	</ul>
+	
+
+</div>
